@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.devblocks.com/schema/plugin.xsd">
+	<id>wgm.hipchat</id>
+	<name>HipChat Integration</name>
+	<description>This plugin provides integration with Atlassian's HipChat via their API. It is intended to be a bridge used by other plugins to communicate with HipChat services. In addition, a new Virtual Attendant action is added for posting automated messages to a HipChat room.</description>
+	<author>WebGroup Media, LLC.</author>
+	<version>0.0.1</version>
+	<link>http://www.cerberusweb.com/</link>
+	<image>plugin.png</image>
+
+	<!-- Requirements -->
+
+	<requires>
+		<app_version min="6.0" max="6.2.99" />
+		<php_extension name="curl" />
+	</requires>
+
+	<!-- Plugin Dependencies -->
+	
+	<dependencies>
+		<require plugin_id="cerberusweb.core" version="6.0.0" />
+	</dependencies>
+
+	<!-- Exported Classes -->
+	
+	<class_loader>
+		<file path="api/App.php">
+			<class name="WgmHipchat_API" />
+		</file>
+	</class_loader>
+
+	<!-- Extensions -->
+
+	<extensions>
+		<!-- Plugin Setup -->
+		
+		<extension point="cerberusweb.plugin.setup">
+			<id>wgmhipchat.setup</id>
+			<name>Setup</name>
+			<class>
+				<file>api/App.php</file>
+				<name>WgmHipchat_Setup</name>
+			</class>
+			<params>
+				<param key="tab_label" value="wgm.hipchat.common" />
+			</params>
+		</extension>
+
+		<!-- Event Actions -->
+		
+		<extension point="devblocks.event.action">
+			<id>wgmhipchat.event.action.post</id>
+			<name>Post to HipChat</name>
+			<class>
+				<file>api/App.php</file>
+				<name>WgmHipchat_EventActionPost</name>
+			</class>
+			<params>
+				<param key="label" value="Post to HipChat" />
+				<param key="events">
+					<value>
+						<data key="*" />
+					</value>
+				</param>
+			</params>
+		</extension>
+	</extensions> 
+</plugin>
