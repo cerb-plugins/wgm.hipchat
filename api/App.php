@@ -78,7 +78,7 @@ class WgmHipchat_API {
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param string $path
 	 * @param string $post
 	 * @return HTTPResponse
@@ -118,8 +118,7 @@ class WgmHipchat_API {
 		if(!empty($color) && in_array($color, array('yellow','red','green','purple','gray','random')))
 			$query['color'] = $color;
 		
-		if(!$notify)
-			$query['notify'] = 0;
+		$query['notify'] = ($notify) ? 1 : 0;
 		
 		$response = $this->_request('rooms/message', $query);
 		$response = json_decode($response, true);

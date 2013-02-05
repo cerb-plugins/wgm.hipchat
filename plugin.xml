@@ -4,7 +4,7 @@
 	<name>HipChat Integration</name>
 	<description>This plugin provides integration with Atlassian's HipChat via their API. It is intended to be a bridge used by other plugins to communicate with HipChat services. In addition, a new Virtual Attendant action is added for posting automated messages to a HipChat room.</description>
 	<author>WebGroup Media, LLC.</author>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<link>http://www.cerberusweb.com/</link>
 	<image>plugin.png</image>
 
