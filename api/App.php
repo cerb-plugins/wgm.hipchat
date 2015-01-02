@@ -90,7 +90,7 @@ class WgmHipchat_API {
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_POST, false);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		
