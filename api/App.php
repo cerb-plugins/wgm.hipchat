@@ -150,6 +150,7 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 		@$room = $tpl_builder->build($params['room'], $dict);
 		@$from = $tpl_builder->build($params['from'], $dict);
 		@$content = $tpl_builder->build($params['content'], $dict);
+		@$run_in_simulator = $params['run_in_simulator'];
 		
 		if(empty($room))
 			return "[ERROR] No room is defined.";
@@ -166,6 +167,11 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 				$from,
 				$content
 			);
+		}
+		
+		// Run in simulator?
+		if($run_in_simulator) {
+			$this->run($token, $trigger, $params, $dict);
 		}
 		
 		return $out;
