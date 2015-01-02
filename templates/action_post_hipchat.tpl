@@ -1,11 +1,11 @@
 <b>Room:</b>
 <div style="margin-left:10px;margin-bottom:10px;">
-	<input type="text" name="{$namePrefix}[room]" size="24" style="width:100%;" value="{if !empty($params.room)}{$params.room}{else}{$default_room}{/if}" required="required">
+	<input type="text" name="{$namePrefix}[room]" size="24" style="width:100%;" value="{if !empty($params.room)}{$params.room}{else}{$default_room}{/if}" class="placeholders" required="required">
 </div>
 
 <b>From:</b>
 <div style="margin-left:10px;margin-bottom:10px;">
-	<input type="text" name="{$namePrefix}[from]" size="15" maxlength="15" style="width:100%;" value="{$params.from}" required="required">
+	<input type="text" name="{$namePrefix}[from]" size="15" maxlength="15" style="width:100%;" value="{$params.from}" class="placeholders" required="required">
 </div>
 
 <b>Message:</b>

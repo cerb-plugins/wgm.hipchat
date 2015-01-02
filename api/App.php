@@ -145,15 +145,25 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 	function simulate($token, Model_TriggerEvent $trigger, $params, DevblocksDictionaryDelegate $dict) {
 		$out = '';
 		
-		@$room = $params['room'];
+		$tpl_builder = DevblocksPlatform::getTemplateBuilder();
+		
+		@$room = $tpl_builder->build($params['room'], $dict);
+		@$from = $tpl_builder->build($params['from'], $dict);
+		@$content = $tpl_builder->build($params['content'], $dict);
 		
 		if(empty($room))
 			return "[ERROR] No room is defined.";
 		
-		$tpl_builder = DevblocksPlatform::getTemplateBuilder();
-		if(false !== ($content = $tpl_builder->build($params['content'], $dict))) {
-			$out .= sprintf(">>> Posting to HipChat (%s):\n%s\n",
+		if(empty($from))
+			return "[ERROR] No from is defined.";
+		
+		if(empty($content))
+			return "[ERROR] No content is defined.";
+		
+		if(!empty($content)) {
+			$out .= sprintf(">>> Posting to HipChat in room: %s\n\n%s: %s\n",
 				$room,
+				$from,
 				$content
 			);
 		}
@@ -166,29 +176,33 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 
 		// Translate message tokens
 		$tpl_builder = DevblocksPlatform::getTemplateBuilder();
-		if(false !== ($content = $tpl_builder->build($params['content'], $dict))) {
-			@$room = $params['room'];
-			@$from = $params['from'];
-			@$is_html = $params['is_html'];
-			@$color = $params['color'];
-			
-			if(empty($is_html)) {
-				$messages = DevblocksPlatform::parseCrlfString($content);
-			} else {
-				$messages = array($content);
-			}
-			
-			if(is_array($messages))
-			foreach($messages as $message) {
-				$response = $hipchat->sendMessageToRoom(
-					$room,
-					$from,
-					$message,
-					($is_html ? 'html' : 'text'),
-					$color,
-					true
-				);
-			}
+		
+		@$room = $tpl_builder->build($params['room'], $dict);
+		@$from = $tpl_builder->build($params['from'], $dict);
+		@$content = $tpl_builder->build($params['content'], $dict);
+		
+		if(empty($room) || empty($from) || empty($content))
+			return false;
+		
+		@$is_html = $params['is_html'];
+		@$color = $params['color'];
+		
+		if(empty($is_html)) {
+			$messages = DevblocksPlatform::parseCrlfString($content);
+		} else {
+			$messages = array($content);
+		}
+		
+		if(is_array($messages))
+		foreach($messages as $message) {
+			$response = $hipchat->sendMessageToRoom(
+				$room,
+				$from,
+				$message,
+				($is_html ? 'html' : 'text'),
+				$color,
+				true
+			);
 		}
 	}
 };
