@@ -4,14 +4,14 @@
 	<name>HipChat Integration</name>
 	<description>This plugin provides integration with Atlassian's HipChat via their API. It is intended to be a bridge used by other plugins to communicate with HipChat services. In addition, a new Virtual Attendant action is added for posting automated messages to a HipChat room.</description>
 	<author>Webgroup Media, LLC.</author>
-	<version>0.0.11</version>
+	<version>0.0.12</version>
 	<link>http://www.cerberusweb.com/</link>
 	<image>plugin.png</image>
 
 	<!-- Requirements -->
 
 	<requires>
-		<app_version min="7.0" max="7.9.99" />
+		<app_version min="7.1" max="7.1.99" />
 		<php_extension name="curl" />
 	</requires>
 
