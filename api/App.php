@@ -86,15 +86,13 @@ class WgmHipchat_API {
 	private function _request($path, array $query=array()) {
 		$url = sprintf('https://api.hipchat.com/v1/%s?auth_token=%s', $path, $this->_api_token);
 		
-		$ch = curl_init();
+		$ch = DevblocksPlatform::curlInit();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_POST, false);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($query));
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 		
-		$response = curl_exec($ch);
+		$response = DevblocksPlatform::curlExec($ch);
 		curl_close($ch);
 		return $response;
 	}
