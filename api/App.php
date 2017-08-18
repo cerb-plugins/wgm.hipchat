@@ -4,7 +4,7 @@ class WgmHipchat_Setup extends Extension_PluginSetup {
 	const POINT = 'wgmhipchat.setup';
 	
 	function render() {
-		$tpl = DevblocksPlatform::getTemplateService();
+		$tpl = DevblocksPlatform::services()->template();
 
 		$params = array(
 			'api_token' => DevblocksPlatform::getPluginSetting('wgm.hipchat','api_token',''),
@@ -128,7 +128,7 @@ class WgmHipchat_API {
 if(class_exists('Extension_DevblocksEventAction')):
 class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 	function render(Extension_DevblocksEvent $event, Model_TriggerEvent $trigger, $params=array(), $seq=null) {
-		$tpl = DevblocksPlatform::getTemplateService();
+		$tpl = DevblocksPlatform::services()->template();
 		$tpl->assign('params', $params);
 		
 		if(!is_null($seq))
@@ -143,7 +143,7 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 	function simulate($token, Model_TriggerEvent $trigger, $params, DevblocksDictionaryDelegate $dict) {
 		$out = '';
 		
-		$tpl_builder = DevblocksPlatform::getTemplateBuilder();
+		$tpl_builder = DevblocksPlatform::services()->templateBuilder();
 		
 		@$room = $tpl_builder->build($params['room'], $dict);
 		@$from = $tpl_builder->build($params['from'], $dict);
@@ -179,7 +179,7 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 		$hipchat = WgmHipchat_API::getInstance();
 
 		// Translate message tokens
-		$tpl_builder = DevblocksPlatform::getTemplateBuilder();
+		$tpl_builder = DevblocksPlatform::services()->templateBuilder();
 		
 		@$room = $tpl_builder->build($params['room'], $dict);
 		@$from = $tpl_builder->build($params['from'], $dict);
