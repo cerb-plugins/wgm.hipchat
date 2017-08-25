@@ -125,7 +125,6 @@ class WgmHipchat_API {
 	}
 };
 
-if(class_exists('Extension_DevblocksEventAction')):
 class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 	function render(Extension_DevblocksEvent $event, Model_TriggerEvent $trigger, $params=array(), $seq=null) {
 		$tpl = DevblocksPlatform::services()->template();
@@ -210,4 +209,3 @@ class WgmHipchat_EventActionPost extends Extension_DevblocksEventAction {
 		}
 	}
 };
-endif;
