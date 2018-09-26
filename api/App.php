@@ -81,7 +81,7 @@ class WgmHipchat_API {
 	 *
 	 * @param string $path
 	 * @param string $post
-	 * @return HTTPResponse
+	 * @return mixed
 	 */
 	private function _request($path, array $query=array()) {
 		$url = sprintf('https://api.hipchat.com/v1/%s?auth_token=%s', $path, $this->_api_token);
